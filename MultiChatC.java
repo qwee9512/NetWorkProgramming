@@ -7,14 +7,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 /*
- * Å¬¶óÀÌ¾ğÆ® ¿ªÇÒÀ» ÇÏ´Â ÇÁ·Î±×·¥
- * ¼­¹ö¿ÍÀÇ ·Î±×ÀÎ, ·Î±×¾Æ¿ô »óÅÂ¸¦ Ã³¸®ÇÏ±â À§ÇØ µÎ°³ÀÇ Thread¸¦ »ı¼ºÇÔ
- * ·Î±×ÀÎ, ·Î±×¾Æ¿ô ¸Ş¼¼Áö¸¦ Àü¼ÛÇÏ°í È®ÀÎ ÀÀ´äÀ» ¹Ş´Â DatagramSocket "socket"
- * ¸ÖÆ¼Ä³½ºÆ® ÁÖ¼Ò·Î µ¥ÀÌÅÍ¸¦ ¼Û/¼ö½ÅÇÏ±â À§ÇÑ MulticastSocket "multi"
+ * í´ë¼ì´ì–¸íŠ¸ ì—­í• ì„ í•˜ëŠ” í”„ë¡œê·¸ë¨
+ * ì„œë²„ì™€ì˜ ë¡œê·¸ì¸, ë¡œê·¸ì•„ì›ƒ ìƒíƒœë¥¼ ì²˜ë¦¬í•˜ê¸° ìœ„í•´ ë‘ê°œì˜ Threadë¥¼ ìƒì„±í•¨
+ * ë¡œê·¸ì¸, ë¡œê·¸ì•„ì›ƒ ë©”ì„¸ì§€ë¥¼ ì „ì†¡í•˜ê³  í™•ì¸ ì‘ë‹µì„ ë°›ëŠ” DatagramSocket "socket"
+ * ë©€í‹°ìºìŠ¤íŠ¸ ì£¼ì†Œë¡œ ë°ì´í„°ë¥¼ ì†¡/ìˆ˜ì‹ í•˜ê¸° ìœ„í•œ MulticastSocket "multi"
  * 
- * Å¬¶óÀÌ¾ğÆ®°¡ ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ°í ·Î±×ÀÎ ¹öÆ°À» ´©¸£¸é ¼­¹öÀÇ ÁÖ¼Ò·Î ÁÖ¼Ò¿äÃ» ¸Ş¼¼Áö¸¦ Àü¼Û
- * ¼­¹ö´Â ¾ÆÀÌµğÀÇ Áßº¹À» È®ÀÎÇÏ°í ¸ÖÆ¼Ä³½ºÆ® Ã¤ÆÃ ±×·ì ÁÖ¼Ò¸¦ ³Ñ±è
- * Å¬¶óÀÌ¾ğÆ®´Â Àü¼Û¿ë ÆĞÅ¶À» ±×·ì ÁÖ¼Ò·Î ÃÊ±âÈ­ÇÏ°í ÅØ½ºÆ®ÇÊµåÀÇ °ªÀ» ÀĞ¾î Åë½ÅÇÔ
+ * í´ë¼ì´ì–¸íŠ¸ê°€ ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ê³  ë¡œê·¸ì¸ ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì„œë²„ì˜ ì£¼ì†Œë¡œ ì£¼ì†Œìš”ì²­ ë©”ì„¸ì§€ë¥¼ ì „ì†¡
+ * ì„œë²„ëŠ” ì•„ì´ë””ì˜ ì¤‘ë³µì„ í™•ì¸í•˜ê³  ë©€í‹°ìºìŠ¤íŠ¸ ì±„íŒ… ê·¸ë£¹ ì£¼ì†Œë¥¼ ë„˜ê¹€
+ * í´ë¼ì´ì–¸íŠ¸ëŠ” ì „ì†¡ìš© íŒ¨í‚·ì„ ê·¸ë£¹ ì£¼ì†Œë¡œ ì´ˆê¸°í™”í•˜ê³  í…ìŠ¤íŠ¸í•„ë“œì˜ ê°’ì„ ì½ì–´ í†µì‹ í•¨
  */
 
 public class MultiChatC extends Frame implements ActionListener, KeyListener
@@ -51,9 +51,9 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 
 	public MultiChatC()
 	{
-		super("Å¬¶óÀÌ¾ğÆ®");
+		super("í´ë¼ì´ì–¸íŠ¸");
 
-		mlbl = new Label("Ã¤ÆÃ »óÅÂ¸¦ º¸¿©Áİ´Ï´Ù.");
+		mlbl = new Label("ì±„íŒ… ìƒíƒœë¥¼ ë³´ì—¬ì¤ë‹ˆë‹¤.");
 		add(mlbl, BorderLayout.NORTH);
 
 		display = new TextArea("", 0, 0, TextArea.SCROLLBARS_VERTICAL_ONLY);
@@ -63,18 +63,18 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 		ptotal = new Panel(new BorderLayout());
 
 		pword = new Panel(new BorderLayout());
-		wlbl = new Label("´ëÈ­¸»");
-		wtext = new TextField(20); // Àü¼ÛÇÒ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ´Â ÇÊµå
-		wtext.addKeyListener(this); // ÀÔ·ÂµÈ µ¥ÀÌÅÍ¸¦ ¼Û½ÅÇÏ±â À§ÇÑ ÀÌº¥Æ® ¿¬°á
+		wlbl = new Label("ëŒ€í™”ë§");
+		wtext = new TextField(20); // ì „ì†¡í•  ë°ì´í„°ë¥¼ ì…ë ¥í•˜ëŠ” í•„ë“œ
+		wtext.addKeyListener(this); // ì…ë ¥ëœ ë°ì´í„°ë¥¼ ì†¡ì‹ í•˜ê¸° ìœ„í•œ ì´ë²¤íŠ¸ ì—°ê²°
 		pword.add(wlbl, BorderLayout.WEST);
 		pword.add(wtext, BorderLayout.EAST);
 		ptotal.add(pword, BorderLayout.NORTH);
 
 		plabel = new Panel(new BorderLayout());
-		loglbl = new Label("·Î±×¿Â");
-		ltext = new TextField(20); // Àü¼ÛÇÒ µ¥ÀÌÅÍ¸¦ ÀÔ·ÂÇÏ´Â ÇÊµå
-		ltext.addActionListener(this); // ÀÔ·ÂµÈ µ¥ÀÌÅÍ¸¦ ¼Û½ÅÇÏ±â À§ÇÑ ÀÌº¥Æ® ¿¬°á
-		logoutBtn = new Button("·Î±×¾Æ¿ô");
+		loglbl = new Label("ë¡œê·¸ì˜¨");
+		ltext = new TextField(20); // ì „ì†¡í•  ë°ì´í„°ë¥¼ ì…ë ¥í•˜ëŠ” í•„ë“œ
+		ltext.addActionListener(this); // ì…ë ¥ëœ ë°ì´í„°ë¥¼ ì†¡ì‹ í•˜ê¸° ìœ„í•œ ì´ë²¤íŠ¸ ì—°ê²°
+		logoutBtn = new Button("ë¡œê·¸ì•„ì›ƒ");
 		logoutBtn.addActionListener(this);
 		plabel.add(loglbl, BorderLayout.WEST);
 		plabel.add(ltext, BorderLayout.EAST);
@@ -88,7 +88,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 
 		try
 		{
-			// ¼­¹ö¿¡ ÁÖ¼Ò ¿äÃ» ¸Ş½ÃÁö¸¦ º¸³»±â À§ÇÑ ¼ÒÄÏ »ı¼º
+			// ì„œë²„ì— ì£¼ì†Œ ìš”ì²­ ë©”ì‹œì§€ë¥¼ ë³´ë‚´ê¸° ìœ„í•œ ì†Œì¼“ ìƒì„±
 			socket = new DatagramSocket();
 			serverIP = InetAddress.getLocalHost();
 			receivePacket = new DatagramPacket(data, data.length);
@@ -96,14 +96,14 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 		}
 		catch (IOException e)
 		{
-			// TODO ÀÚµ¿ »ı¼ºµÈ catch ºí·Ï
+			// TODO ìë™ ìƒì„±ëœ catch ë¸”ë¡
 			e.printStackTrace();
 		}
 	}
 
 	public void runClient()
 	{
-		mlbl.setText("¸ÖÆ¼Ä³½ºÆ® Ã¤ÆÃ ¼­¹ö¿¡ °¡ÀÔ ¿äÃ»ÇÕ´Ï´Ù.");
+		mlbl.setText("ë©€í‹°ìºìŠ¤íŠ¸ ì±„íŒ… ì„œë²„ì— ê°€ì… ìš”ì²­í•©ë‹ˆë‹¤.");
 		clientdata = new StringBuffer(2048);
 		while (true)
 		{
@@ -111,13 +111,13 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 			{
 				try
 				{
-					// DatagramSocketÀ¸·Î ¸ÖÆ¼Ä³½ºÆ® ÁÖ¼Ò ¹Ş±â
+					// DatagramSocketìœ¼ë¡œ ë©€í‹°ìºìŠ¤íŠ¸ ì£¼ì†Œ ë°›ê¸°
 					socket.receive(receivePacket);
 					serverdata = new String(receivePacket.getData(), receivePacket.getOffset(),
 							receivePacket.getLength());
 
-					// ·Î±×ÀÎ ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀÌ OKÀÌ¸é ¹ŞÀº ¸ÖÆ¼Ä³½ºÆ® IPÁÖ¼Ò¿¡ Âü¿©ÇÑ´Ù.
-					// ·Î±×ÀÎ ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀÌ DENYÀÌ¸é Áßº¹ ¾ÆÀÌµğÀÓÀ» Ç¥½ÃÇÑ´Ù.
+					// ë¡œê·¸ì¸ ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì´ OKì´ë©´ ë°›ì€ ë©€í‹°ìºìŠ¤íŠ¸ IPì£¼ì†Œì— ì°¸ì—¬í•œë‹¤.
+					// ë¡œê·¸ì¸ ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì´ DENYì´ë©´ ì¤‘ë³µ ì•„ì´ë””ì„ì„ í‘œì‹œí•œë‹¤.
 					StringTokenizer st = new StringTokenizer(serverdata, SEPARATOR);
 					int command = Integer.parseInt(st.nextToken());
 					switch (command)
@@ -128,14 +128,14 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 						multi.joinGroup(groupIP);
 						String message = st.nextToken();
 						while (st.hasMoreTokens())
-						{ // °ø¹é¹®ÀÚ ´ÙÀ½¿¡ ¿À´Â ´ëÈ­¸»Ãß°¡
+						{ // ê³µë°±ë¬¸ì ë‹¤ìŒì— ì˜¤ëŠ” ëŒ€í™”ë§ì¶”ê°€
 							message = message + " " + st.nextToken();
 						}
 						display.append(message + "\r\n");
-						mlbl.setText(ID + "(À¸)·Î ·Î±×ÀÎ ÇÏ¿´½À´Ï´Ù.");
+						mlbl.setText(ID + "(ìœ¼)ë¡œ ë¡œê·¸ì¸ í•˜ì˜€ìŠµë‹ˆë‹¤.");
 						ltext.setText("");
 
-						// ·Î±×¾Æ¿ô ¹öÆ°À» ¶ç¿ò
+						// ë¡œê·¸ì•„ì›ƒ ë²„íŠ¼ì„ ë„ì›€
 						ptotal.remove(plabel);
 						ptotal.add(logoutBtn, BorderLayout.SOUTH);
 						setVisible(true);
@@ -145,7 +145,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 					}
 					case REQ_LOGON_DENY:
 					{
-						mlbl.setText("ÀÌ¹Ì Á¸ÀçÇÏ´Â IDÀÔ´Ï´Ù!!!");
+						mlbl.setText("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” IDì…ë‹ˆë‹¤!!!");
 						ltext.setText("");
 						ID = null;
 						break;
@@ -169,7 +169,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 			ID = ltext.getText();
 			try
 			{
-				// ·Î±×ÀÎ¿äÃ»|¾ÆÀÌµğ| ÇüÅÂ·Î ¼­¹ö¿¡ ¸Ş¼¼Áö¸¦ Àü¼Û
+				// ë¡œê·¸ì¸ìš”ì²­|ì•„ì´ë””| í˜•íƒœë¡œ ì„œë²„ì— ë©”ì„¸ì§€ë¥¼ ì „ì†¡
 				clientdata.setLength(0);
 				clientdata.append(REQ_LOGON);
 				clientdata.append(SEPARATOR);
@@ -178,12 +178,12 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 				sendPacket = new DatagramPacket(clientdata.toString().getBytes(),
 						clientdata.toString().getBytes().length, serverIP, serverPORT);
 				socket.send(sendPacket);
-				// ·Î±×ÀÎÀÌ ¿Ï·áµÇ¸é ´ëÈ­¸» ÅØ½ºÆ®ÇÊµå·Î Æ÷Ä¿½º¸¦ ¿Å±è
+				// ë¡œê·¸ì¸ì´ ì™„ë£Œë˜ë©´ ëŒ€í™”ë§ í…ìŠ¤íŠ¸í•„ë“œë¡œ í¬ì»¤ìŠ¤ë¥¼ ì˜®ê¹€
 				wtext.requestFocus();
 			}
 			catch (IOException e1)
 			{
-				// TODO ÀÚµ¿ »ı¼ºµÈ catch ºí·Ï
+				// TODO ìë™ ìƒì„±ëœ catch ë¸”ë¡
 				e1.printStackTrace();
 			}
 		}
@@ -193,7 +193,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 	{
 		try
 		{
-			// ·Î±×¾Æ¿ô¿äÃ»|¾ÆÀÌµğ ÇüÅÂ·Î ¼­¹ö¿¡ ¸Ş¼¼Áö¸¦ Àü¼Û
+			// ë¡œê·¸ì•„ì›ƒìš”ì²­|ì•„ì´ë”” í˜•íƒœë¡œ ì„œë²„ì— ë©”ì„¸ì§€ë¥¼ ì „ì†¡
 			clientdata.setLength(0);
 			clientdata.append(REQ_LOGOUT);
 			clientdata.append(SEPARATOR);
@@ -202,11 +202,11 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 			data = clientdata.toString().getBytes();
 			sendPacket = new DatagramPacket(data, data.length, serverIP, serverPORT);
 			socket.send(sendPacket);
-			// login ¸Ş¼­µå°¡ ½ÇÇàµÇ¾î ¾òÀº groupIP¿¡¼­ ³ª°¨
+			// login ë©”ì„œë“œê°€ ì‹¤í–‰ë˜ì–´ ì–»ì€ groupIPì—ì„œ ë‚˜ê°
 			multi.leaveGroup(groupIP);
 
-			mlbl.setText(ID + "(ÀÌ)°¡ ·Î±×¾Æ¿ô ÇÏ¿´½À´Ï´Ù.");
-			// ·Î±×¾Æ¿ô ½Ã Å¬¶óÀÌ¾ğÆ® È­¸éÀ» ÃÊ±âÈ­¸éÀ¸·Î µ¹¾Æ°¡°Ô ÇÔ
+			mlbl.setText(ID + "(ì´)ê°€ ë¡œê·¸ì•„ì›ƒ í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			// ë¡œê·¸ì•„ì›ƒ ì‹œ í´ë¼ì´ì–¸íŠ¸ í™”ë©´ì„ ì´ˆê¸°í™”ë©´ìœ¼ë¡œ ëŒì•„ê°€ê²Œ í•¨
 			display.setText("");
 			ID = null;
 
@@ -216,7 +216,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 		}
 		catch (IOException e)
 		{
-			// TODO ÀÚµ¿ »ı¼ºµÈ catch ºí·Ï
+			// TODO ìë™ ìƒì„±ëœ catch ë¸”ë¡
 			e.printStackTrace();
 		}
 	}
@@ -246,7 +246,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 		}
 	}
 
-	// ´ëÈ­¸» Àü¼ÛÀ» À§ÇÑ ÇÔ¼ö
+	// ëŒ€í™”ë§ ì „ì†¡ì„ ìœ„í•œ í•¨ìˆ˜
 	public void keyPressed(KeyEvent ke)
 	{
 		if (ke.getKeyChar() == KeyEvent.VK_ENTER)
@@ -255,7 +255,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 			StringTokenizer st = new StringTokenizer(message, " ");
 			if (ID == null)
 			{
-				mlbl.setText("·Î±×ÀÎ ÈÄ ÀÌ¿ëÇÏ¼¼¿ä!!!");
+				mlbl.setText("ë¡œê·¸ì¸ í›„ ì´ìš©í•˜ì„¸ìš”!!!");
 				wtext.setText("");
 			}
 			else
@@ -293,7 +293,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 	{
 	}
 	
-	// ¸ÖÆ¼Ä³½ºÆ® ¸Ş¼¼Áö¸¦ Ã³¸®ÇÏ±â À§ÇØ »ı¼ºÇÑ Å¬·¡½º
+	// ë©€í‹°ìºìŠ¤íŠ¸ ë©”ì„¸ì§€ë¥¼ ì²˜ë¦¬í•˜ê¸° ìœ„í•´ ìƒì„±í•œ í´ë˜ìŠ¤
 	class rThread extends Thread
 	{
 		public void run()
@@ -312,7 +312,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 					case REQ_LOGON:
 					{
 						String memberID = st.nextToken();
-						display.append("»ç¿ëÀÚ " + memberID + "(ÀÌ)°¡ ·Î±×ÀÎ ÇÏ¿´½À´Ï´Ù" + "\r\n");
+						display.append("ì‚¬ìš©ì " + memberID + "(ì´)ê°€ ë¡œê·¸ì¸ í•˜ì˜€ìŠµë‹ˆë‹¤" + "\r\n");
 						break;
 					}
 
@@ -328,7 +328,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 						}
 						catch (NoSuchElementException e)
 						{
-							// ºó ¸Ş¼¼Áö°¡ µµÂøÇßÀ»¶§ ¿À·ù¸¦ Ã³¸®ÇÏ±â À§ÇØ ÀÛ¼º
+							// ë¹ˆ ë©”ì„¸ì§€ê°€ ë„ì°©í–ˆì„ë•Œ ì˜¤ë¥˜ë¥¼ ì²˜ë¦¬í•˜ê¸° ìœ„í•´ ì‘ì„±
 							memberMessage = "";
 							display.append(memberID + " : " + memberMessage + "\r\n");
 						}
@@ -345,7 +345,7 @@ public class MultiChatC extends Frame implements ActionListener, KeyListener
 				}
 				catch (IOException e)
 				{
-					// TODO ÀÚµ¿ »ı¼ºµÈ catch ºí·Ï
+					// TODO ìë™ ìƒì„±ëœ catch ë¸”ë¡
 					e.printStackTrace();
 				}
 			}
